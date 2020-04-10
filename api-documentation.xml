@@ -1,0 +1,838 @@
+<document page-count="7">
+    <page number="1">
+        <table data-filename="api-documentation.pdf" data-page="1" data-table="1">
+            <tr>
+                <td colspan="4">aicloud public api</td>
+            </tr>
+            <tr>
+                <td colspan="4">Overview</td>
+            </tr>
+            <tr>
+                <td colspan="4">aicloud public api with jwt auth (v1)</td>
+            </tr>
+            <tr>
+                <td colspan="4">Paths</td>
+            </tr>
+            <tr>
+                <td colspan="4">GET /public/v1/jobs Get Job List</td>
+            </tr>
+            <tr>
+                <td colspan="4">get job list in namespace</td>
+            </tr>
+            <tr>
+                <td colspan="4">Parameters</td>
+            </tr>
+            <tr>
+                <td>Type</td>
+                <td>Name</td>
+                <td>Description</td>
+                <td>Schema</td>
+            </tr>
+            <tr>
+                <td>header</td>
+                <td>authorizatio</td>
+                <td colspan="2">This is access_token part of JWT token from string</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>n</td>
+                <td>/auth method</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>required</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>header</td>
+                <td>x-api-key</td>
+                <td>User API key, also called GWAPI_KEY</td>
+                <td>string</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>required</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan="4">Responses</td>
+            </tr>
+            <tr>
+                <td>Code</td>
+                <td>Description</td>
+                <td colspan="2">Links</td>
+            </tr>
+            <tr>
+                <td style="text-align: right">200</td>
+                <td>Successful Response</td>
+                <td colspan="2">No Links</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>Content</td>
+                <td colspan="2"></td>
+            </tr>
+            <tr>
+                <td style="text-align: right">401</td>
+                <td>Authentication error occurred</td>
+                <td colspan="2">No Links</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>Content</td>
+                <td colspan="2"></td>
+            </tr>
+            <tr>
+                <td style="text-align: right">422</td>
+                <td>Validation Error</td>
+                <td colspan="2">No Links</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>Content</td>
+                <td colspan="2"></td>
+            </tr>
+            <tr>
+                <td style="text-align: right">500</td>
+                <td>Backend error</td>
+                <td colspan="2">No Links</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>Content</td>
+                <td colspan="2"></td>
+            </tr>
+            <tr>
+                <td style="text-align: right" colspan="4">1</td>
+            </tr>
+        </table>
+    </page>
+    <page number="2">
+        <table data-filename="api-documentation.pdf" data-page="2" data-table="1">
+            <tr>
+                <td colspan="3">Components</td>
+            </tr>
+            <tr>
+                <td colspan="3">Schemas</td>
+            </tr>
+            <tr>
+                <td colspan="3">AuthErrorModel</td>
+            </tr>
+            <tr>
+                <td colspan="3">Title: AuthErrorModel</td>
+            </tr>
+            <tr>
+                <td colspan="3">Properties</td>
+            </tr>
+            <tr>
+                <td>Name</td>
+                <td>Description</td>
+                <td>Schema</td>
+            </tr>
+            <tr>
+                <td>error_code</td>
+                <td>Title: Returns authentication error code</td>
+                <td>integer</td>
+            </tr>
+            <tr>
+                <td>required</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>error_message</td>
+                <td>Title: Return authentication error message text</td>
+                <td>string</td>
+            </tr>
+            <tr>
+                <td>required</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan="3">CopyTask</td>
+            </tr>
+            <tr>
+                <td colspan="3">Title: CopyTask</td>
+            </tr>
+            <tr>
+                <td colspan="3">Properties</td>
+            </tr>
+            <tr>
+                <td>Name</td>
+                <td>Description</td>
+                <td>Schema</td>
+            </tr>
+            <tr>
+                <td>src required</td>
+                <td>Title: Src</td>
+                <td>string</td>
+            </tr>
+            <tr>
+                <td>dst required</td>
+                <td>Title: Dst</td>
+                <td>string</td>
+            </tr>
+            <tr>
+                <td>recursive</td>
+                <td>Title: Recursive</td>
+                <td>boolean</td>
+            </tr>
+            <tr>
+                <td>optional</td>
+                <td>Default: false</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan="3">ErrorModel</td>
+            </tr>
+            <tr>
+                <td colspan="3">Title: ErrorModel</td>
+            </tr>
+            <tr>
+                <td colspan="3">Properties</td>
+            </tr>
+            <tr>
+                <td>Name</td>
+                <td>Description</td>
+                <td>Schema</td>
+            </tr>
+            <tr>
+                <td>error_code</td>
+                <td>Returns numeric code presence if error occured</td>
+                <td>integer</td>
+            </tr>
+            <tr>
+                <td>required</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>Title: Numeric error code</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>error_message</td>
+                <td>Message text describing occured error</td>
+                <td>string</td>
+            </tr>
+            <tr>
+                <td>required</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>Title: Return error message text</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td style="text-align: right" colspan="3">2</td>
+            </tr>
+        </table>
+    </page>
+    <page number="3">
+        <table data-filename="api-documentation.pdf" data-page="3" data-table="1">
+            <tr>
+                <td colspan="3">Flags</td>
+            </tr>
+            <tr>
+                <td colspan="3">Title: Flags</td>
+            </tr>
+            <tr>
+                <td colspan="3">Properties</td>
+            </tr>
+            <tr>
+                <td>Name</td>
+                <td>Description</td>
+                <td>Schema</td>
+            </tr>
+            <tr>
+                <td>batch_size</td>
+                <td>Title: Batch Size</td>
+                <td>string</td>
+            </tr>
+            <tr>
+                <td>optional</td>
+                <td>Default: 512</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>model optional</td>
+                <td>Title: Model</td>
+                <td>string</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>Default: resnet50</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>variable_updat</td>
+                <td>Title: Variable Update</td>
+                <td>string</td>
+            </tr>
+            <tr>
+                <td>e optional</td>
+                <td>Default: horovod</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>use_fp16</td>
+                <td>Title: Use Fp16</td>
+                <td>boolean</td>
+            </tr>
+            <tr>
+                <td>optional</td>
+                <td>Default: true</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>xla optional</td>
+                <td>Title: Xla</td>
+                <td>boolean</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>Default: true</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan="3">HTTPValidationError</td>
+            </tr>
+            <tr>
+                <td colspan="3">Title: HTTPValidationError</td>
+            </tr>
+            <tr>
+                <td colspan="3">Properties</td>
+            </tr>
+            <tr>
+                <td>Name</td>
+                <td>Description</td>
+                <td>Schema</td>
+            </tr>
+            <tr>
+                <td>detail optional</td>
+                <td>Title: Detail</td>
+                <td style="text-align: right">&lt;</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td>ValidationErro</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td>r &gt; array</td>
+            </tr>
+            <tr>
+                <td colspan="3">JobListModel</td>
+            </tr>
+            <tr>
+                <td colspan="3">Title: JobListModel</td>
+            </tr>
+            <tr>
+                <td colspan="3">Properties</td>
+            </tr>
+            <tr>
+                <td>Name</td>
+                <td>Description</td>
+                <td>Schema</td>
+            </tr>
+            <tr>
+                <td>error_code</td>
+                <td>0 - means everything is OK</td>
+                <td>integer</td>
+            </tr>
+            <tr>
+                <td>optional</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>Title: Presence of error</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>error_message</td>
+                <td>Blank because no error occurred</td>
+                <td>string</td>
+            </tr>
+            <tr>
+                <td>optional</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>Title: Error message text</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td style="text-align: right" colspan="3">3</td>
+            </tr>
+        </table>
+    </page>
+    <page number="4">
+        <table data-filename="api-documentation.pdf" data-page="4" data-table="1">
+            <tr>
+                <td>Name</td>
+                <td>Description</td>
+                <td colspan="2">Schema</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>status optional</td>
+                <td>Return 'ok' message text or can be blank</td>
+                <td colspan="2">string</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>Title: Status field</td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>Default: ok</td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>jobs optional</td>
+                <td>Show job status description</td>
+                <td style="text-align: right">&lt;</td>
+                <td>JobStatus</td>
+                <td style="text-align: right">&gt;</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td colspan="2">array</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>Title: Jobs</td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan="5">JobStatus</td>
+            </tr>
+            <tr>
+                <td colspan="5">Title: JobStatus</td>
+            </tr>
+            <tr>
+                <td colspan="5">Properties</td>
+            </tr>
+            <tr>
+                <td>Name</td>
+                <td>Description</td>
+                <td colspan="3">Schema</td>
+            </tr>
+            <tr>
+                <td>job_name</td>
+                <td>Title: Job Name</td>
+                <td colspan="3">string</td>
+            </tr>
+            <tr>
+                <td>required</td>
+                <td></td>
+                <td colspan="3"></td>
+            </tr>
+            <tr>
+                <td>status required</td>
+                <td>Title: Status</td>
+                <td colspan="3">string</td>
+            </tr>
+            <tr>
+                <td>created_at</td>
+                <td>Title: Created At</td>
+                <td colspan="3">integer</td>
+            </tr>
+            <tr>
+                <td>required</td>
+                <td></td>
+                <td colspan="3"></td>
+            </tr>
+            <tr>
+                <td colspan="5">JobTask</td>
+            </tr>
+            <tr>
+                <td colspan="5">Title: JobTaaspkplication/json</td>
+            </tr>
+            <tr>
+                <td colspan="5">Properties</td>
+            </tr>
+            <tr>
+                <td>Name</td>
+                <td>Description</td>
+                <td colspan="3">Schema</td>
+            </tr>
+            <tr>
+                <td colspan="2">script requairpepdlicaTtiitloen:/ jSscorinpt</td>
+                <td colspan="3">string</td>
+            </tr>
+            <tr>
+                <td>base_image</td>
+                <td>Title: Base Image</td>
+                <td colspan="3">string</td>
+            </tr>
+            <tr>
+                <td>required</td>
+                <td></td>
+                <td colspan="3"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>application/json</td>
+                <td colspan="3"></td>
+            </tr>
+            <tr>
+                <td>n_workers</td>
+                <td>Title: N Workers</td>
+                <td colspan="3">integer</td>
+            </tr>
+            <tr>
+                <td>optional</td>
+                <td>Default: 1</td>
+                <td colspan="3"></td>
+            </tr>
+            <tr>
+                <td>n_gpus</td>
+                <td>applicaTtiitloen:/ jNs oGnpus</td>
+                <td colspan="3">integer</td>
+            </tr>
+            <tr>
+                <td>optional</td>
+                <td>Default: 1</td>
+                <td colspan="3"></td>
+            </tr>
+            <tr>
+                <td>warm_cache</td>
+                <td>Title: Warm Cache</td>
+                <td colspan="3">boolean</td>
+            </tr>
+            <tr>
+                <td>optional</td>
+                <td>Default: true</td>
+                <td colspan="3"></td>
+            </tr>
+            <tr>
+                <td style="text-align: right" colspan="5">4</td>
+            </tr>
+        </table>
+    </page>
+    <page number="5">
+        <table data-filename="api-documentation.pdf" data-page="5" data-table="1">
+            <tr>
+                <td>Name</td>
+                <td>Description</td>
+                <td>Schema</td>
+            </tr>
+            <tr>
+                <td>stop_timer</td>
+                <td>Title: Stop Timer</td>
+                <td>integer</td>
+            </tr>
+            <tr>
+                <td>optional</td>
+                <td>Default: 0</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>type optional</td>
+                <td>Title: Type</td>
+                <td>string</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>Default: horovod</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>flags optional</td>
+                <td>Title: Flags</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan="3">NoErrorModel</td>
+            </tr>
+            <tr>
+                <td colspan="3">Title: NoErrorModel</td>
+            </tr>
+            <tr>
+                <td colspan="3">Properties</td>
+            </tr>
+            <tr>
+                <td>Name</td>
+                <td>Description</td>
+                <td>Schema</td>
+            </tr>
+            <tr>
+                <td>error_code</td>
+                <td>0 - means everything is OK</td>
+                <td>integer</td>
+            </tr>
+            <tr>
+                <td>optional</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>Title: Presence of error</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>error_message</td>
+                <td>Blank because no error occurred</td>
+                <td>string</td>
+            </tr>
+            <tr>
+                <td>optional</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>Title: Error message text</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>status optional</td>
+                <td>Return 'ok' message text or can be blank</td>
+                <td>string</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>Title: Status field</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>Default: ok</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan="3">S3Cred</td>
+            </tr>
+            <tr>
+                <td colspan="3">Title: S3Cred</td>
+            </tr>
+            <tr>
+                <td colspan="3">Properties</td>
+            </tr>
+            <tr>
+                <td>Name</td>
+                <td>Description</td>
+                <td>Schema</td>
+            </tr>
+            <tr>
+                <td>s3_namespace</td>
+                <td>Title: S3 Namespace</td>
+                <td>string</td>
+            </tr>
+            <tr>
+                <td>required</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>s3_endpoint</td>
+                <td>Title: S3 Endpoint</td>
+                <td>string</td>
+            </tr>
+            <tr>
+                <td>optional</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>access_key_id</td>
+                <td>Title: Access Key Id</td>
+                <td>string</td>
+            </tr>
+            <tr>
+                <td>required</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td style="text-align: right" colspan="3">5</td>
+            </tr>
+        </table>
+    </page>
+    <page number="6">
+        <table data-filename="api-documentation.pdf" data-page="6" data-table="1">
+            <tr>
+                <td>Name</td>
+                <td>Description</td>
+                <td>Schema</td>
+            </tr>
+            <tr>
+                <td>security_key</td>
+                <td>Title: Security Key</td>
+                <td>string</td>
+            </tr>
+            <tr>
+                <td>required</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan="3">ServiceJob</td>
+            </tr>
+            <tr>
+                <td colspan="3">Title: ServiceJob</td>
+            </tr>
+            <tr>
+                <td colspan="3">Properties</td>
+            </tr>
+            <tr>
+                <td>Name</td>
+                <td>Description</td>
+                <td>Schema</td>
+            </tr>
+            <tr>
+                <td>error_code</td>
+                <td>0 - means everything is OK</td>
+                <td>integer</td>
+            </tr>
+            <tr>
+                <td>optional</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>Title: Presence of error</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>error_message</td>
+                <td>Blank because no error occurred</td>
+                <td>string</td>
+            </tr>
+            <tr>
+                <td>optional</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>Title: Error message text</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>status optional</td>
+                <td>Return 'ok' message text or can be blank</td>
+                <td>string</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>Title: Status field</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>Default: ok</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>job_name</td>
+                <td>Long description</td>
+                <td>string</td>
+            </tr>
+            <tr>
+                <td>optional</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>Title: Short description</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan="3">User</td>
+            </tr>
+            <tr>
+                <td colspan="3">Title: User</td>
+            </tr>
+            <tr>
+                <td colspan="3">Properties</td>
+            </tr>
+            <tr>
+                <td>Name</td>
+                <td>Description</td>
+                <td>Schema</td>
+            </tr>
+            <tr>
+                <td>email required</td>
+                <td>Title: Email</td>
+                <td>string</td>
+            </tr>
+            <tr>
+                <td>password</td>
+                <td>Title: Password</td>
+                <td>string</td>
+            </tr>
+            <tr>
+                <td>required</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan="3">ValidationError</td>
+            </tr>
+            <tr>
+                <td colspan="3">Title: ValidationError</td>
+            </tr>
+            <tr>
+                <td colspan="3">Properties</td>
+            </tr>
+            <tr>
+                <td style="text-align: right" colspan="3">6</td>
+            </tr>
+        </table>
+    </page>
+    <page number="7">
+        <table data-filename="api-documentation.pdf" data-page="7" data-table="1">
+            <tr>
+                <td>Name</td>
+                <td>Description</td>
+                <td>Schema</td>
+            </tr>
+            <tr>
+                <td>loc required</td>
+                <td>Title: Location</td>
+                <td>&lt; string &gt; array</td>
+            </tr>
+            <tr>
+                <td>msg required</td>
+                <td>Title: Message</td>
+                <td>string</td>
+            </tr>
+            <tr>
+                <td>type required</td>
+                <td>Title: Error Type</td>
+                <td>string</td>
+            </tr>
+            <tr>
+                <td style="text-align: right" colspan="3">7</td>
+            </tr>
+        </table>
+    </page>
+</document>
