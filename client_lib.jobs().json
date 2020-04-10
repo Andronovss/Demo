@@ -1,0 +1,351 @@
+openapi: 3.0.2
+info:
+  title: aicloud public api
+  description: aicloud public api with jwt auth (v1)
+  version: 0.0.3
+paths:
+  /public/v1/jobs:
+    get:
+      summary: Get Job List
+      description: get job list in namespace
+      operationId: get_job_list_public_v1_jobs_get
+      parameters:
+        - description: 'User API key, also called GWAPI_KEY'
+          required: true
+          schema:
+            title: 'User API key header, also called GWAPI_KEY'
+            type: string
+            description: 'User API key, also called GWAPI_KEY'
+            example: 44b5e14a-3919-11ea-8f8f-3a4ce9d1e497
+          name: x-api-key
+          in: header
+        - description: This is access_token part of JWT token from /auth method
+          required: true
+          schema:
+            title: Authorization header
+            type: string
+            description: This is access_token part of JWT token from /auth method
+            example: >-
+              eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICIzYXRNRXZQY3ZmSU02VkxDNmlBM19oUlMxaVprZ1ExbWpIUnlOYXA2WEVvIn0.eyJqdGkiOiI4MTllMDAyOS0wZjZjLTQxZDUtOWQyZS0wNjAyYzkyYTRjN2QiLCJleHAiOjE1ODY0MTgyMzUsIm5iZiI6MCwiaWF0IjoxNTg2NDE3MzM1LCJpc3MiOiJodHRwOi8vMTkyLjE2OC42Ny4xOTo4MDgwL2F1dGgvcmVhbG1zL21hc3RlciIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiJmNGJiYmNlYy01NTgyLTQyZTctODY3My1mMDg2NTA5OGY1MTEiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJhaWNsb3VkLWFwaSIsImF1dGhfdGltZSI6MCwic2Vzc2lvbl9zdGF0ZSI6ImY0MDQ4NDhiLTZjMWYtNDIzOS04MTc1LTEyM2Y3OWNhMDY5NCIsImFjciI6IjEiLCJhbGxvd2VkLW9yaWdpbnMiOlsiKiJdLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsib2ZmbGluZV9hY2Nlc3MiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoiZW1haWwgcHJvZmlsZSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwicHJlZmVycmVkX3VzZXJuYW1lIjoiYWFrbGltb3ZAc2JlcmNsb3VkLnJ1IiwiZW1haWwiOiJhYWtsaW1vdkBzYmVyY2xvdWQucnUifQ.G-3YYGwXQ7Vivx_p3TkfAGdd5zFXWaSsCLlMP34fH8JXJ-_NjeTPAFq4vGIALRlKYsUwXCl6K4Rcj2O3Gh-3uyKYbJh_qRjZEOECjri_SnPuarB3umJOOrw5ahSymQKNqK_SlIiWjERp-bLyWPs2Wb9JCIztHRIl_KIlrAmgSCdamBDcYc10rqjveSE0TCaWHqz4icDFC_HNqhzjuoq4ss3s_76j71zVSFap72EIdoiL5Wex5v3mjbab02hfkeeRhh05ttGJHr2eI13kSapZU99CdCpUkT0ZGQTKGMN3ZEmaUDPwqjacngBCqaHoZSGPfnTelFI45KbME2onvWLR7w
+          name: authorization
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobListModel'
+        '401':
+          description: Authentication error occurred
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthErrorModel'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+        '500':
+          description: Backend error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+components:
+  schemas:
+    AuthErrorModel:
+      title: AuthErrorModel
+      required:
+        - error_code
+        - error_message
+      type: object
+      properties:
+        error_code:
+          title: Returns authentication error code
+          type: integer
+          example: 1
+        error_message:
+          title: Return authentication error message text
+          type: string
+          example: invalid user credentials
+      example:
+        - error_code: 1
+          error_message: invalid user credentials
+        - error_code: 2
+          error_message: namespace not found
+        - error_code: 9
+          error_message: 'no api-key header, it is required'
+        - error_code: 10
+          error_message: invalid api-key
+        - error_code: 19
+          error_message: 'no authorization header, it is required'
+        - error_code: 20
+          error_message: access_token expired
+        - error_code: 21
+          error_message: invalid access_token
+    CopyTask:
+      title: CopyTask
+      required:
+        - src
+        - dst
+      type: object
+      properties:
+        src:
+          title: Src
+          type: string
+        dst:
+          title: Dst
+          type: string
+        recursive:
+          title: Recursive
+          type: boolean
+          default: false
+    ErrorModel:
+      title: ErrorModel
+      required:
+        - error_code
+        - error_message
+      type: object
+      properties:
+        error_code:
+          title: Numeric error code
+          type: integer
+          description: Returns numeric code presence if error occured
+          example: 1
+        error_message:
+          title: Return error message text
+          type: string
+          description: Message text describing occured error
+          example: This is error_message example
+    Flags:
+      title: Flags
+      type: object
+      properties:
+        batch_size:
+          title: Batch Size
+          type: string
+          default: 512
+        model:
+          title: Model
+          type: string
+          default: resnet50
+        variable_update:
+          title: Variable Update
+          type: string
+          default: horovod
+        use_fp16:
+          title: Use Fp16
+          type: boolean
+          default: true
+        xla:
+          title: Xla
+          type: boolean
+          default: true
+    HTTPValidationError:
+      title: HTTPValidationError
+      type: object
+      properties:
+        detail:
+          title: Detail
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationError'
+    JobListModel:
+      title: JobListModel
+      type: object
+      properties:
+        error_code:
+          title: Presence of error
+          type: integer
+          description: 0 - means everything is OK
+          default:
+            - 0
+        error_message:
+          title: Error message text
+          type: string
+          description: Blank because no error occurred
+          default:
+            - ''
+          example: ''
+        status:
+          title: Status field
+          type: string
+          description: Return 'ok' message text or can be blank
+          default: ok
+          example: ok
+        jobs:
+          title: Jobs
+          type: array
+          items:
+            $ref: '#/components/schemas/JobStatus'
+          description: Show job status description
+    JobStatus:
+      title: JobStatus
+      required:
+        - job_name
+        - status
+        - created_at
+      type: object
+      properties:
+        job_name:
+          title: Job Name
+          type: string
+        status:
+          title: Status
+          type: string
+        created_at:
+          title: Created At
+          type: integer
+      example:
+        - job_name: lm-mpi-job-edccec55-e031-48c0-be35-ea804dfffadf
+          status: Pending
+          created_at: 1586423784
+    JobTask:
+      title: JobTask
+      required:
+        - script
+        - base_image
+      type: object
+      properties:
+        script:
+          title: Script
+          type: string
+        base_image:
+          title: Base Image
+          type: string
+        n_workers:
+          title: N Workers
+          type: integer
+          default: 1
+        n_gpus:
+          title: N Gpus
+          type: integer
+          default: 1
+        warm_cache:
+          title: Warm Cache
+          type: boolean
+          default: true
+        stop_timer:
+          title: Stop Timer
+          type: integer
+          default: 0
+        type:
+          title: Type
+          type: string
+          default: horovod
+        flags:
+          title: Flags
+          allOf:
+            - $ref: '#/components/schemas/Flags'
+          default:
+            batch_size: '512'
+            model: resnet50
+            variable_update: horovod
+            use_fp16: true
+            xla: true
+    NoErrorModel:
+      title: NoErrorModel
+      type: object
+      properties:
+        error_code:
+          title: Presence of error
+          type: integer
+          description: 0 - means everything is OK
+          default:
+            - 0
+        error_message:
+          title: Error message text
+          type: string
+          description: Blank because no error occurred
+          default:
+            - ''
+          example: ''
+        status:
+          title: Status field
+          type: string
+          description: Return 'ok' message text or can be blank
+          default: ok
+          example: ok
+    S3Cred:
+      title: S3Cred
+      required:
+        - s3_namespace
+        - access_key_id
+        - security_key
+      type: object
+      properties:
+        s3_namespace:
+          title: S3 Namespace
+          type: string
+        s3_endpoint:
+          title: S3 Endpoint
+          type: string
+        access_key_id:
+          title: Access Key Id
+          type: string
+        security_key:
+          title: Security Key
+          type: string
+    ServiceJob:
+      title: ServiceJob
+      type: object
+      properties:
+        error_code:
+          title: Presence of error
+          type: integer
+          description: 0 - means everything is OK
+          default:
+            - 0
+        error_message:
+          title: Error message text
+          type: string
+          description: Blank because no error occurred
+          default:
+            - ''
+          example: ''
+        status:
+          title: Status field
+          type: string
+          description: Return 'ok' message text or can be blank
+          default: ok
+          example: ok
+        job_name:
+          title: Short description
+          type: string
+          description: Long description
+          example: exampleofid-job-id
+    User:
+      title: User
+      required:
+        - email
+        - password
+      type: object
+      properties:
+        email:
+          title: Email
+          type: string
+        password:
+          title: Password
+          type: string
+    ValidationError:
+      title: ValidationError
+      required:
+        - loc
+        - msg
+        - type
+      type: object
+      properties:
+        loc:
+          title: Location
+          type: array
+          items:
+            type: string
+        msg:
+          title: Message
+          type: string
+        type:
+          title: Error Type
+          type: string
